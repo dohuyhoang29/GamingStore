@@ -38,9 +38,9 @@ public class CategoryManagementController {
     if (result.hasErrors()){
       return "/admin/category/form_category";
     }
-
-    service.saveCategory(category);
-
+    Category c = category;
+//    service.saveCategory(category);
+    System.out.println(category.getStatus());
     return "redirect:/admin/category/show_category";
   }
 
