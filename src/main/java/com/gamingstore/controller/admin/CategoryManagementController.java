@@ -38,9 +38,7 @@ public class CategoryManagementController {
     if (result.hasErrors()){
       return "/admin/category/form_category";
     }
-    Category c = category;
-//    service.saveCategory(category);
-    System.out.println(category.getStatus());
+    service.saveCategory(category);
     return "redirect:/admin/category/show_category";
   }
 
@@ -51,5 +49,12 @@ public class CategoryManagementController {
     model.addAttribute("status", category.getStatus());
 
     return "/admin/category/form_category";
+  }
+
+  @GetMapping("/admin/category/delete/{categoryID}")
+  public String deleteCategory(@PathVariable("categoryID") Integer categoryID) {
+    service.deleteCategoryById(categoryID);
+
+    return "redirect:/admin/category/show_category";
   }
 }

@@ -21,4 +21,8 @@ public class CategoryService {
   public Category findCategoryById(Integer id) {
     return repo.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id : " + id)  );
   }
+
+  public void deleteCategoryById(Integer id) {
+    repo.deleteById(id);
+  }
 }
