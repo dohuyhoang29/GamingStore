@@ -32,30 +32,24 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="page-header">
-          <h3 th:if="${product.productID == null}" class="page-title"> Insert Category </h3>
-          <h3 th:unless="${product.productID == null}" class="page-title"> Edit Category </h3>
+          <h3 class="page-title"> Insert Category </h3>
         </div>
         <div class="row">
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <form class="forms-sample" method="post" th:object="${product}" th:action="@{/admin/product/save}">
-                  <input type="hidden" th:field="*{productID}" th:value="${product.productID}">
+                <form class="forms-sample" method="post" th:object="${category}" th:action="@{/admin/category/save}">
+                  <input type="hidden" th:field="*{categoryID}">
+                  <input type="hidden" th:field="*{status}" th:value="${status}">
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Product Name</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" th:field="*{productName}" placeholder="Product Name">
-                    <p class="error-message" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">Product Name Error</p>
+                    <label for="exampleInputUsername1">Category Name</label>
+                    <input type="text" class="form-control" id="exampleInputUsername1" th:field="*{categoryName}" placeholder="Category Name">
+                    <p class="error-message" th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Category Name Error</p>
                   </div>
                   <div class="form-group form-floating">
-                    <label>Category Name</label>
-                    <select class="form-control" th:field="*{category}">
-                      <option th:each="category : ${listCategory}" th:value="${category.categoryID}" th:utext="${category.categoryName}"></option>
-                    </select>
-                  </div>
-                  <div class="form-group form-floating">
-                    <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" th:field="*{price}" placeholder="Price">
-                    <p class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Description Error</p>
+                    <label for="exampleInputEmail1">Description</label>
+                    <textarea class="form-control" id="exampleInputEmail1" th:field="*{description}" placeholder="Description"></textarea>
+                    <p class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
                   </div>
                   <button type="submit" class="btn btn-primary mr-2">Submit</button>
                   <a th:href="@{/admin/category/show_category}"><button type="button" class="btn btn-dark">Cancel</button></a>

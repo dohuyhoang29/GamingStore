@@ -8,13 +8,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-
 @Documented
-@Constraint(validatedBy = Validation.class)
-@Target( { ElementType.METHOD, ElementType.FIELD } )
+@Constraint(validatedBy = DuplicateProductNameValidator.class)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Validator {
-  String message() default "Not empty";
+@Target( { ElementType.METHOD, ElementType.FIELD} )
+public @interface DuplicateProductName {
+  String message() default "Product Name is must be unique";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 }

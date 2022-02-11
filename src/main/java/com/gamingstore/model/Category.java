@@ -1,10 +1,15 @@
 package com.gamingstore.model;
 
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -21,7 +26,7 @@ import lombok.Setter;
 public class Category {
 
   @Id
-  @Column(name = "categoryID", length = 11, nullable = false)
+  @Column(name = "category_id", length = 11, nullable = false)
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer categoryID;
 
@@ -35,6 +40,13 @@ public class Category {
 
   @Column(name = "status", nullable = false)
   private String status;
+
+  @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+  private Set<Product> products;
+
+  @ManyToOne
+  @JoinColumn(name = "brand_id")
+  private Brand brand;
 
   public Category(String categoryName, String description, String status) {
     this.categoryName = categoryName;

@@ -19,6 +19,9 @@
   <!-- Layout styles -->
   <link rel="stylesheet" th:href="@{/css/style.css}">
   <!-- End layout styles -->
+  <style>
+
+  </style>
 </head>
 <body>
 <div class="container-scroller">
@@ -32,52 +35,27 @@
     <div class="main-panel">
       <div class="content-wrapper">
         <div class="page-header">
-          <h3 class="page-title">Product Management</h3>
+          <h3 class="page-title">Brand Management</h3>
         </div>
         <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <a class="card-title" th:href="@{/admin/product/insert}">
-                  <button type="button" class="btn btn-outline-primary"> + Add Product</button>
+                <a class="card-title" th:href="@{/admin/brand/insert}">
+                  <button type="button" class="btn btn-outline-primary"> + Add Brand</button>
                 </a>
                 <div class="">
                   <table class="table">
                     <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Product Name</th>
                       <th>Category Name</th>
-                      <th>Price</th>
+                      <th>Description</th>
                       <th>Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <th:block th:each="product : ${listProduct}">
-                      <tr>
-                        <td>[[${product.productID}]]</td>
-                        <td>[[${product.productName}]]</td>
-                        <td>[[${product.category.categoryName}]]</td>
-                        <td>[[${product.price}]]</td>
-                        <td>[[${product.status}]]</td>
-                        <td class="text-center">
-                          <div class="btn-group">
-                            <a th:href="@{/admin/product/edit/{productID}(productID=${product.productID})}">
-                              <button type="button" class="btn btn-outline-primary mr-2">Edit</button>
-                            </a>
-                            <button type="button" class="btn btn-outline-warning dropdown-toggle mr mr-2"  style="border: 1px solid #ffab00" data-toggle="dropdown">Status</button>
-                            <div class="dropdown-menu">
-                              <a th:href="@{/admin/account_management/lock/{id}(id=${product.productID})}" class="dropdown-item">Lock</a>
-                              <a th:href="@{/admin/account_management/unlock/{id}(id=${product.productID})}" class="dropdown-item">Un-Lock</a>
-                            </div>
-                            <a th:href="@{/admin/product/delete/{productID}(productID=${product.productID})}">
-                              <button type="button" class="btn btn-outline-danger mr-2">Delete</button>
-                            </a>
-                          </div>
-                        </td>
-                      </tr>
-                    </th:block>
                     </tbody>
                   </table>
                 </div>
