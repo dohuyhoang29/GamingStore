@@ -38,21 +38,23 @@
           <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <form class="forms-sample" method="post" th:object="${category}" th:action="@{/admin/category/save}">
-                  <input type="hidden" th:field="*{categoryID}">
-                  <input type="hidden" th:field="*{status}" th:value="${status}">
+                <form class="forms-sample" method="post" th:object="${brand}" th:action="@{/admin/brand/save}">
+                  <input type="hidden" th:field="*{brandID}">
                   <div class="form-group">
-                    <label for="exampleInputUsername1">Category Name</label>
-                    <input type="text" class="form-control" id="exampleInputUsername1" th:field="*{categoryName}" placeholder="Category Name">
-                    <p class="error-message" th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Category Name Error</p>
+                    <label for="exampleInputUsername1">Brand Name</label>
+                    <input type="text" class="form-control" id="exampleInputUsername1" th:field="*{brandName}" placeholder="Brand Name">
+                    <p class="error-message" th:if="${#fields.hasErrors('brandName')}" th:errors="*{brandName}">Brand Name Error</p>
                   </div>
-                  <div class="form-group form-floating">
-                    <label for="exampleInputEmail1">Description</label>
-                    <textarea class="form-control" id="exampleInputEmail1" th:field="*{description}" placeholder="Description"></textarea>
-                    <p class="error-message" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description Error</p>
+                  <div class="form-group">
+                    <label>Choose one or more categories</label>
+                    <select name="" id="" th:field="*{categories}" multiple="multiple" class="form-control" required>
+                      <th:block th:each="category : ${listCategory}">
+                        <option th:value="${category.categoryID}" th:utext="${category.categoryName}"></option>
+                      </th:block>
+                    </select>
                   </div>
                   <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                  <a th:href="@{/admin/category/show_category}"><button type="button" class="btn btn-dark">Cancel</button></a>
+                  <a th:href="@{/admin/brand/show_brand}"><button type="button" class="btn btn-dark">Cancel</button></a>
                 </form>
               </div>
             </div>

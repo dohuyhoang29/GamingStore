@@ -49,13 +49,34 @@
                     <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Brand Name</th>
                       <th>Category Name</th>
-                      <th>Description</th>
-                      <th>Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <th:block th:each="brand : ${listBrand}">
+                      <tr>
+                        <td>[[${brand.brandID}]]</td>
+                        <td>[[${brand.brandName}]]</td>
+                        <td>[[${brand.categories}]]</td>
+                        <td class="text-center">
+                          <div class="btn-group">
+                            <a th:href="@{/admin/brand/edit/{productID}(productID=${brand.brandID})}">
+                              <button type="button" class="btn btn-outline-primary mr-2">Edit</button>
+                            </a>
+                            <button type="button" class="btn btn-outline-warning dropdown-toggle mr mr-2"  style="border: 1px solid #ffab00" data-toggle="dropdown">Status</button>
+                            <div class="dropdown-menu">
+                              <a th:href="@{/admin/account_management/lock/{id}(id=${brand.brandID})}" class="dropdown-item">Lock</a>
+                              <a th:href="@{/admin/account_management/unlock/{id}(id=${brand.brandID})}" class="dropdown-item">Un-Lock</a>
+                            </div>
+                            <a th:href="@{/admin/brand/delete/{productID}(productID=${brand.brandID})}">
+                              <button type="button" class="btn btn-outline-danger mr-2">Delete</button>
+                            </a>
+                          </div>
+                        </td>
+                      </tr>
+                    </th:block>
                     </tbody>
                   </table>
                 </div>

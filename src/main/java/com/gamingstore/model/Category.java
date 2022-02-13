@@ -53,4 +53,9 @@ public class Category {
     this.description = description;
     this.status = status;
   }
+
+  @Override
+  public String toString() {
+    return categoryName;
+  }
 }
