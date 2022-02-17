@@ -1,11 +1,21 @@
 package com.gamingstore.model;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,35 +26,43 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Account {
-
     public static final String CUSTOMER = "Customer";
 
     @Id
-    @Column(name = "id", length = 11, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "account_id", length = 11, nullable = false)
+    private Integer accountID;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
+    @NotEmpty(message = "Email is required")
+    @Email(message = "Email must be correct format")
     private String email;
 
     @Column(name = "password", nullable = false)
+    @NotEmpty(message = "Password is required")
+    @Min(value = 8, message = "Password must have at least 8 characters")
     private String password;
-
-    @Column(name = "type", nullable = false)
-    private String type;
 
     @Column(name = "status", nullable = false)
     private String status;
 
-    public Account(String username, String email, String password, String type,
-        String status) {
-        this.username = username;
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @JoinTable(name = "account_role",
+        joinColumns = @JoinColumn(name = "account_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public Account(String email, String password, String status) {
         this.email = email;
         this.password = password;
-        this.type = type;
         this.status = status;
+    }
+
+    public void addRole (Role role) {
+        this.roles.add(role);
+    }
+
+    public void removeRole (Role role) {
+        this.roles.remove(role);
     }
 }

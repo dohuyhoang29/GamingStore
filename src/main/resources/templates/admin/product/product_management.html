@@ -49,7 +49,7 @@
                       <th>Product Name</th>
                       <th>Category Name</th>
                       <th>Price</th>
-                      <th>Status</th>
+                      <th class="text-center">Details</th>
                       <th class="text-center">Actions</th>
                     </tr>
                     </thead>
@@ -60,7 +60,7 @@
                         <td>[[${product.productName}]]</td>
                         <td>[[${product.category.categoryName}]]</td>
                         <td>[[${product.price}]]</td>
-                        <td>[[${product.status}]]</td>
+                        <td class="text-center">[[${product.productDetails}]]</td>
                         <td class="text-center">
                           <div class="btn-group">
                             <a th:href="@{/admin/product/edit/{productID}(productID=${product.productID})}">

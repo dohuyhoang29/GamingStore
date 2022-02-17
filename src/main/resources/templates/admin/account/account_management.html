@@ -34,19 +34,22 @@
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
+        <div class="page-header">
+          <h3 class="page-title">Account Management</h3>
+        </div>
         <div class="row">
           <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
-                <h4 class="card-title">Basic Table</h4>
-                <div class="">
+                <a class="card-title" th:href="@{/admin/account/insert}">
+                  <button type="button" class="btn btn-outline-primary"> + Add Account</button>
+                </a>
                   <table class="table">
                     <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Username</th>
                       <th>Email</th>
-                      <th>Type</th>
+                      <th>Role</th>
                       <th>Status</th>
                       <th class="text-center">Actions</th>
                     </tr>
@@ -54,18 +57,23 @@
                     <tbody>
                     <th:block th:each="account : ${listAccounts}">
                       <tr>
-                        <td>[[${account.id}]]</td>
-                        <td>[[${account.username}]]</td>
+                        <td>[[${account.accountID}]]</td>
                         <td>[[${account.email}]]</td>
-                        <td>[[${account.type}]]</td>
+                        <td>[[${account.roles}]]</td>
                         <td>[[${account.status}]]</td>
                         <td class="text-center">
                           <div class="btn-group">
-                            <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown">Change Status</button>
+                            <a th:href="@{/admin/account/edit/{accountID}(accountID=${account.accountID})}">
+                              <button type="button" class="btn btn-outline-primary mr-2">Edit</button>
+                            </a>
+                            <button type="button" class="btn btn-outline-warning dropdown-toggle mr-2" data-toggle="dropdown">Change Status</button>
                             <div class="dropdown-menu">
-                              <a th:href="@{/admin/account_management/lock/{id}(id=${account.id})}" class="dropdown-item">Lock</a>
-                              <a th:href="@{/admin/account_management/unlock/{id}(id=${account.id})}" class="dropdown-item">Un-Lock</a>
+                              <a th:href="@{/admin/account_management/lock/{id}(id=${account.accountID})}" class="dropdown-item">Lock</a>
+                              <a th:href="@{/admin/account_management/unlock/{id}(id=${account.accountID})}" class="dropdown-item">Un-Lock</a>
                             </div>
+                            <a th:href="@{/admin/account/delete/{accountID}(accountID=${account.accountID})}">
+                              <button type="button" class="btn btn-outline-danger mr-2">Delete</button>
+                            </a>
                           </div>
                         </td>
                       </tr>

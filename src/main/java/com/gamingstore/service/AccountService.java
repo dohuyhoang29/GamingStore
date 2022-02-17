@@ -30,6 +30,14 @@ public class AccountService {
     return repo.findAll();
   }
 
+  public Account findAccountById(Integer id)   {
+    return repo.findById(id).get();
+  }
+
+  public void deleteAccountById(Integer id) {
+    repo.deleteById(id);
+  }
+
   public void lockAccount(Integer id) {
     repo.lockAccountById(id);
   }

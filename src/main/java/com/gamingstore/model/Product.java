@@ -57,4 +57,12 @@ public class Product {
     this.productName = productName;
     this.price = price;
   }
+
+  public void addDetails(String name, String value) {
+    this.productDetails.add(new ProductDetails(name, value, this));
+  }
+
+  public void setProductDetail(Integer id, String name, String value) {
+    this.productDetails.add(new ProductDetails(id, name, value, this));
+  }
 }

@@ -22,7 +22,6 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String saveAccount(Account account) {
-        service.saveAccount(new Account(account.getUsername(), account.getEmail(), account.getPassword(), Account.CUSTOMER, GamingStoreApplication.UN_LOCK));
 
         return "/register";
     }

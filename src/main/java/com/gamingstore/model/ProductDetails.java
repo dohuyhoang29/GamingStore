@@ -8,10 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "product_details")
+@NoArgsConstructor
+@Getter
+@Setter
 public class ProductDetails {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "product_details_id", nullable = false)
@@ -27,35 +34,22 @@ public class ProductDetails {
   @JoinColumn(name = "product_id")
   private Product products;
 
-  public Integer getProductDetailsID() {
-    return productDetailsID;
-  }
-
-  public void setProductDetailsID(Integer productDetailsID) {
-    this.productDetailsID = productDetailsID;
-  }
-
-  public String getProductDetailsName() {
-    return productDetailsName;
-  }
-
-  public void setProductDetailsName(String productDetailsName) {
+  public ProductDetails(String productDetailsName, String productDetailsValue, Product products) {
     this.productDetailsName = productDetailsName;
-  }
-
-  public String getProductDetailsValue() {
-    return productDetailsValue;
-  }
-
-  public void setProductDetailsValue(String productDetailsValue) {
     this.productDetailsValue = productDetailsValue;
-  }
-
-  public Product getProducts() {
-    return products;
-  }
-
-  public void setProducts(Product products) {
     this.products = products;
+  }
+
+  public ProductDetails(Integer productDetailsID, String productDetailsName,
+      String productDetailsValue, Product product) {
+    this.productDetailsID = productDetailsID;
+    this.productDetailsName = productDetailsName;
+    this.productDetailsValue = productDetailsValue;
+    this.products = product;
+  }
+
+  @Override
+  public String toString() {
+    return productDetailsName + "=" + productDetailsValue;
   }
 }

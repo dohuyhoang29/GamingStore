@@ -48,34 +48,96 @@
                   </div>
                   <div class="form-group form-floating">
                     <label>Category Name</label>
-                    <select class="form-control s-example-basic-single" th:field="*{category}">
+                    <select class="form-control" th:field="*{category}">
                       <option th:each="category : ${listCategory}" th:value="${category.categoryID}" th:utext="${category.categoryName}"></option>
                     </select>
                   </div>
                   <div class="form-group form-floating">
                     <label for="price">Price</label>
-                    <input type="text" class="form-control" id="price" th:field="*{price}" placeholder="Price">
+                    <input type="number" class="form-control" id="price" th:field="*{price}" placeholder="Price">
                     <p class="error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Description Error</p>
                   </div>
-                  <div class="form-group form-floating">
-                    <label for="price">Details</label>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                  <th:block th:unless="${product.productID} == null" th:each="details, status : ${product.productDetails}">
+                    <input type="hidden" name="detailsID" th:value="${details.productDetailsID}">
+                    <div class="form-group form-floating">
+                      <label for="price">Details #[[${status.count}]]</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsName" th:value="${details.productDetailsName}"/>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group row">
-                          <div class="col-sm-12">
-                            <input type="text" class="form-control" />
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsValue" th:value="${details.productDetailsValue}"/>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </th:block>
+                  <th:block th:if="${product.productID} == null">
+                    <div class="form-group form-floating">
+                      <label for="price">Details #1</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsName" placeholder="Name"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsValue" placeholder="Value"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group form-floating">
+                      <label for="price">Details #2</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsName" placeholder="Name"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsValue" placeholder="Value"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group form-floating">
+                      <label for="price">Details #3</label>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsName" placeholder="Name"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <div class="col-sm-12">
+                              <input type="text" class="form-control" name="detailsValue" placeholder="Value"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </th:block>
                   <button type="submit" class="btn btn-primary mr-2">Submit</button>
                   <a th:href="@{/admin/category/show_category}"><button type="button" class="btn btn-dark">Cancel</button></a>
                 </form>
