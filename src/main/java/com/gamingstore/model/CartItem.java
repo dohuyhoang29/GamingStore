@@ -18,6 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CartItem {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "cart_item_id")
@@ -39,9 +40,21 @@ public class CartItem {
     this.product = product;
     this.account = account;
 
-  }public CartItem(int quantity, Product product, Account account) {
+  }
+
+  public CartItem(int quantity, Product product, Account account) {
     this.quantity = quantity;
     this.product = product;
     this.account = account;
+  }
+
+  @Override
+  public String toString() {
+    return "CartItem{" +
+        "cartItemID=" + cartItemID +
+        ", quantity=" + quantity +
+        ", product=" + product +
+        ", account=" + account +
+        '}';
   }
 }

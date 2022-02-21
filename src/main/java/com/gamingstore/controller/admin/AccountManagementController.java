@@ -1,10 +1,12 @@
 package com.gamingstore.controller.admin;
 
 import com.gamingstore.model.Account;
+import com.gamingstore.repositories.AccountRepositories;
 import com.gamingstore.service.AccountService;
 import com.gamingstore.service.RoleService;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,6 +20,9 @@ public class AccountManagementController {
 
   @Autowired
   private AccountService accountService;
+
+  @Autowired
+  private AccountRepositories repo;
 
   @Autowired
   private RoleService roleService;
@@ -45,6 +50,8 @@ public class AccountManagementController {
 
       return "/admin/account/form_account";
     }
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    account.setPassword(encoder.encode(account.getPassword()));
 
     accountService.saveAccount(account);
 
@@ -78,5 +85,10 @@ public class AccountManagementController {
     accountService.unLockAccount(id);
 
     return "redirect:/admin/account_management";
+  }
+
+  @GetMapping("/admin/account/logout")
+  public String logout() {
+    return "login";
   }
 }

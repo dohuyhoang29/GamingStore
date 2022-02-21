@@ -4,8 +4,9 @@
     <a class="sidebar-brand brand-logo" th:href="@{/admin/dashboard}"><img
         th:src="@{/images/logo.png}"
         alt=""/></a>
-    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin/dashboard}"><img th:src="@{/images/logo-mini.png}"
-                                                                        alt=""/></a>
+    <a class="sidebar-brand brand-logo-mini" th:href="@{/admin/dashboard}"><img
+        th:src="@{/images/logo-mini.png}"
+        alt=""/></a>
   </div>
   <ul class="nav">
     <li class="nav-item profile">
@@ -16,7 +17,8 @@
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
-            <h5 class="mb-0 font-weight-normal">Do Huy Hoang</h5>
+            <h5 class="mb-0 font-weight-normal">
+              [[${#request.userPrincipal.principal.fullName}]]</h5>
             <span>Gold Member</span>
           </div>
         </div>

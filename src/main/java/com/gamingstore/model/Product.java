@@ -28,6 +28,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Product {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "product_id", length = 11, nullable = false)
@@ -52,6 +53,10 @@ public class Product {
   @OneToMany(mappedBy = "products", cascade = CascadeType.ALL)
   private List<ProductDetails> productDetails = new ArrayList<>();
 
+  public Product(Integer productID) {
+    this.productID = productID;
+  }
+
   public Product(Category category, String productName, Float price) {
     this.category = category;
     this.productName = productName;
@@ -64,5 +69,12 @@ public class Product {
 
   public void setProductDetail(Integer id, String name, String value) {
     this.productDetails.add(new ProductDetails(id, name, value, this));
+  }
+
+  @Override
+  public String toString() {
+    return "Product{" +
+        "productName='" + productName + '\'' +
+        '}';
   }
 }

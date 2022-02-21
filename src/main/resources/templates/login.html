@@ -16,14 +16,14 @@
         <div class="card col-lg-4 mx-auto">
           <div class="card-body px-5 py-5">
             <h3 class="card-title text-left mb-3">Login</h3>
-            <form th:action="@{/login/save}" th:object="${account}" method="post">
+            <form th:action="@{/login}" method="post">
               <div class="form-group">
                 <label>Username or email *</label>
-                <input type="email" id="email" name="email" class="form-control p_input">
+                <input type="email" name="email" class="form-control p_input">
               </div>
               <div class="form-group">
                 <label>Password *</label>
-                <input type="password" id="password" name="password"
+                <input type="password" name="password"
                        class="form-control p_input text-light">
               </div>
               <div class="form-group d-flex align-items-center justify-content-between">
@@ -35,7 +35,9 @@
                 <a href="#" class="forgot-pass">Forgot password</a>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+                <button type="submit" class="btn btn-primary btn-block enter-btn" value="login">
+                  Login
+                </button>
               </div>
               <div class="d-flex">
                 <button class="btn btn-facebook mr-2 col">

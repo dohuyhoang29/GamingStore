@@ -14,7 +14,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,43 +25,62 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Account {
-    public static final String CUSTOMER = "Customer";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "account_id", length = 11, nullable = false)
-    private Integer accountID;
+  public static final String CUSTOMER = "Customer";
 
-    @Column(name = "email", nullable = false, unique = true)
-    @NotEmpty(message = "Email is required")
-    @Email(message = "Email must be correct format")
-    private String email;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "account_id", length = 11, nullable = false)
+  private Integer accountID;
 
-    @Column(name = "password", nullable = false)
-    @NotEmpty(message = "Password is required")
-    @Min(value = 8, message = "Password must have at least 8 characters")
-    private String password;
+  @Column(name = "email", nullable = false, unique = true)
+  @NotEmpty(message = "Email is required")
+  @Email(message = "Email must be correct format")
+  private String email;
 
-    @Column(name = "status", nullable = false)
-    private String status;
+  @Column(name = "password", nullable = false)
+  @NotEmpty(message = "Password is required")
+  private String password;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @JoinTable(name = "account_role",
-        joinColumns = @JoinColumn(name = "account_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+  @NotEmpty(message = "First Name is required")
+  @Column(name = "first_name", nullable = false)
+  private String firstName;
 
-    public Account(String email, String password, String status) {
-        this.email = email;
-        this.password = password;
-        this.status = status;
-    }
+  @NotEmpty(message = "Last Name is required")
+  @Column(name = "last_name", nullable = false)
+  private String lastName;
 
-    public void addRole (Role role) {
-        this.roles.add(role);
-    }
+  @Column(name = "status")
+  private String status;
 
-    public void removeRole (Role role) {
-        this.roles.remove(role);
-    }
+  @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @JoinTable(name = "account_role",
+      joinColumns = @JoinColumn(name = "account_id"),
+      inverseJoinColumns = @JoinColumn(name = "role_id"))
+  private Set<Role> roles = new HashSet<>();
+
+  public Account(Integer id) {
+    this.accountID = id;
+  }
+
+  public Account(String email, String password, String status) {
+    this.email = email;
+    this.password = password;
+    this.status = status;
+  }
+
+  public void addRole(Role role) {
+    this.roles.add(role);
+  }
+
+  public void removeRole(Role role) {
+    this.roles.remove(role);
+  }
+
+  @Override
+  public String toString() {
+    return "Account{" +
+        "email='" + email + '\'' +
+        '}';
+  }
 }
